@@ -1,0 +1,23 @@
+body {
+    text-align: center;    
+}
+
+section {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 767px;
+}
+h1 {
+    font-size: 4rem;
+}
+ 
+h2 {
+    font-size: 3.5rem;
+}
+
+p {
+    font-size: 3.5rem;
+    text-align: justify;
+
+}
+
