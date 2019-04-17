@@ -4,9 +4,10 @@ function StarWarsService($location, $http) {
     service.getEpisode = () => {
         // Default to the good one
         let episode = 1;
+
         let hash =  Number.parseInt($location.hash());
 
-        if ( service.validateEpisode(episode) ) {
+        if ( service.validateEpisode(hash) ) {
             episode = hash;
         }
 
@@ -22,7 +23,7 @@ function StarWarsService($location, $http) {
     }
 
     service.validateEpisode = (number) => {
-        return Number.isInteger(number) && number > 0 && number < 9;
+        return Number.isInteger(number) && (number > 0) && (number < 9);
     };
 
     service.callStarWarsAPI = (episode) => {
