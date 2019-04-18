@@ -41,11 +41,11 @@ function Crawler(StarWarsService, $q, $timeout, $rootScope) {
         if ( index === crawlerData.length ) {
             $timeout( () => {
                 resolve();
-            }, 1000)
+            }, 800)
         } else {
             $timeout( () => {
                 ctrl.crawler.push(crawlerData[index]);
-            }, 1000)
+            }, 800)
             .then( _ => {
                 index++;
             
