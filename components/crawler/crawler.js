@@ -1,6 +1,15 @@
 function Crawler(StarWarsService, $q, $timeout, $rootScope) {
     const ctrl = this;
     
+    /**
+     * This function is setting up initial values when the component loads.
+     * Crawler and show are empty before the API is called, once it is 
+     * called crawler starts to fill up and when the lines are finished
+     * show is set to "True" which adds the "next" and "previous" episode
+     * buttons to the page.
+     * 
+     */
+    
     ctrl.$onInit = function() {
         ctrl.crawler = [];
         ctrl.show = false;
@@ -28,9 +37,19 @@ function Crawler(StarWarsService, $q, $timeout, $rootScope) {
         });
     }
 
+    /**
+     * nextEpisode is getting the next episode from the Star Wars Service
+     *
+     */
+
     ctrl.nextEpisode = () => {
         StarWarsService.nextEpisode();
     }
+
+    /**
+     * previousEpisode is getting the pervious episode from the Star Wars Service
+     *
+     */
 
     ctrl.previousEpisode = () => {
         StarWarsService.previousEpisode();
