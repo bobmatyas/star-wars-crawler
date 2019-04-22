@@ -2,7 +2,7 @@ function Crawler(StarWarsService, $q, $timeout, $rootScope) {
     const ctrl = this;
     
     /**
-     * This function is setting up initial values when the component loads.
+     * This part is setting up initial values when the component loads.
      * Crawler and show are empty before the API is called, once it is 
      * called crawler starts to fill up and when the lines are finished
      * show is set to "True" which adds the "next" and "previous" episode
@@ -23,7 +23,15 @@ function Crawler(StarWarsService, $q, $timeout, $rootScope) {
         .then( _ => ctrl.show = true ); 
     });
 
-    ctrl.getStarWarsCrawler = () => {
+    /**
+     * This is using promises to call the Star Wars API and set the episode and start the
+     * crawl.
+     * 
+     * .then is operating on a successful request and is then setting the values and 
+     * resolving the promise.
+     */
+    
+     ctrl.getStarWarsCrawler = () => {
         // call star wars API
         // attach to template one by one
         return $q(function(resolve, reject) {
@@ -31,6 +39,10 @@ function Crawler(StarWarsService, $q, $timeout, $rootScope) {
             .then( (response) => {
                 ctrl.crawler.push(`Episode ${response.data.episode_id}: ${response.data.title}`);
 
+                /** 
+                 * this line is splitting the "opening crawl text" and sticking it in an array
+                 * to be parsed and added to the screen.
+                 * */ 
                 let crawlerData = response.data.opening_crawl.split('\n');
                 ctrl.addToCrawler(crawlerData, 0, resolve);
             });   
@@ -54,6 +66,12 @@ function Crawler(StarWarsService, $q, $timeout, $rootScope) {
     ctrl.previousEpisode = () => {
         StarWarsService.previousEpisode();
     }
+
+    /** 
+     * addToCrawler is checking the length of crawlerData and if it matches the index, it is
+     * resolving the promise and ending the sequence, otherwise it is adding lines to crawlerData
+     * to display on the page.
+    */
 
     ctrl.addToCrawler = (crawlerData, index, resolve) => {
 
